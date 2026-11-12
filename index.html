@@ -1,151 +1,1672 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" content="#101322" />
-<meta name="description" content="UniStream — your campus, your progress, one platform. A smart university student workspace." />
-<meta property="og:title" content="UniStream — Smart University Management" />
-<meta property="og:description" content="Your campus, your progress, one platform." />
-<title>UniStream — Smart University Management</title>
-<style>
-:root{--bg:#0d1020;--panel:#151a2d;--panel2:#1b2238;--text:#eef1ff;--muted:#9ba5c3;--line:#2a3150;--accent:#8b7cff;--cyan:#56d6d0;--pink:#f18bb5;--yellow:#f4c76b;--green:#76d6a2;--shadow:0 18px 50px #05071366}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0%,#25204b 0,transparent 32%),var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-button,input,select,textarea{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
-.sidebar{padding:28px 18px;border-right:1px solid var(--line);background:#101426cc;position:sticky;top:0;height:100vh}
-.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:20px;letter-spacing:-.5px;padding:0 10px 32px}.logo{width:35px;height:35px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--cyan));display:grid;place-items:center;color:#11152a;font-weight:900}
-.nav-label{font-size:10px;color:#707b9e;font-weight:800;letter-spacing:1.5px;padding:12px 12px 8px}.nav{display:grid;gap:6px}.nav button{border:0;background:transparent;color:var(--muted);padding:11px 12px;border-radius:12px;text-align:left;display:flex;gap:12px;align-items:center}.nav button.active,.nav button:hover{background:#272644;color:white}.nav .ico{width:20px;text-align:center}.side-bottom{position:absolute;bottom:22px;left:18px;right:18px;background:linear-gradient(145deg,#25224b,#182c42);border:1px solid #37365e;border-radius:16px;padding:15px}.side-bottom strong{display:block;margin-bottom:4px}.side-bottom small{color:var(--muted)}
-main{padding:30px clamp(18px,4vw,54px);max-width:1500px;width:100%;margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:30px}.eyebrow{color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}.topbar h1{font-size:clamp(25px,3vw,34px);letter-spacing:-1.2px;margin:4px 0}.sub{color:var(--muted);margin:0}.top-actions{display:flex;gap:10px;align-items:center}.pill{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 13px;color:var(--text)}.avatar{width:40px;height:40px;border-radius:14px;background:linear-gradient(135deg,#ffb86c,#e87fae);display:grid;place-items:center;color:#17172b;font-weight:900}
-.page{display:none}.page.active{display:block}.grid{display:grid;gap:16px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:18px}.card{background:linear-gradient(145deg,#191f34,#14192b);border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:var(--shadow)}.stat-top{display:flex;justify-content:space-between;color:var(--muted);font-size:13px}.stat-icon{width:35px;height:35px;border-radius:11px;display:grid;place-items:center;background:#29274b}.stat-value{font-size:30px;font-weight:800;letter-spacing:-1px;margin:12px 0 1px}.trend{font-size:12px;color:var(--green)}.content-grid{grid-template-columns:minmax(0,1.5fr) minmax(270px,.9fr)}.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.card h2{font-size:16px;margin:0}.muted{color:var(--muted)}.link-btn{border:0;background:none;color:var(--cyan);font-size:12px;font-weight:700}.chart{height:190px;display:flex;align-items:end;gap:12px;padding:15px 5px 0;border-bottom:1px solid var(--line)}.bar-wrap{flex:1;height:100%;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:8px}.bar{width:min(35px,75%);border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,var(--accent),#4d4b9e);min-height:8px;position:relative}.bar:nth-child(2n){background:linear-gradient(180deg,var(--cyan),#397f91)}.bar-label{font-size:11px;color:var(--muted)}
-.progress-list{display:grid;gap:16px}.progress-row{display:grid;grid-template-columns:1fr auto;gap:7px;font-size:13px}.track{grid-column:1/-1;height:7px;background:#282e49;border-radius:10px;overflow:hidden}.fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--cyan))}
-.task-list{display:grid;gap:9px}.task{display:flex;align-items:center;gap:11px;background:#11172a;border:1px solid #252d49;padding:11px;border-radius:12px}.task input{accent-color:var(--accent);width:17px;height:17px}.task.done .task-title{text-decoration:line-through;color:#77819f}.task-info{flex:1;min-width:0}.task-title{font-size:13px;font-weight:650}.task-meta{font-size:11px;color:var(--muted)}.tag{font-size:10px;padding:4px 8px;border-radius:20px;background:#30294d;color:#c4baff;white-space:nowrap}.tag.high{background:#482b42;color:#ffb2ca}.tag.medium{background:#473d28;color:#f5d18a}
-.week{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}.day{background:#11172a;border:1px solid #252d49;border-radius:13px;padding:12px;min-height:125px}.day strong{font-size:12px}.class{font-size:11px;margin-top:9px;padding:7px;border-radius:8px;background:#29264a;color:#d7d2ff}.class:nth-child(odd){background:#1d3942;color:#a8f0e9}
-.field{width:100%;background:#10162a;border:1px solid var(--line);border-radius:10px;padding:11px;color:var(--text);outline:none}.field:focus{border-color:var(--accent)}.form-row{display:flex;gap:9px;flex-wrap:wrap}.form-row>*{flex:1;min-width:130px}.primary{background:linear-gradient(120deg,#8b7cff,#5b9ed8);color:#fff;border:0;border-radius:10px;padding:11px 16px;font-weight:750}.secondary{background:#252b45;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px 13px}.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{text-align:left;padding:12px 9px;border-bottom:1px solid var(--line)}.table th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1px}.notes{min-height:230px;resize:vertical}.grade-result{font-size:42px;font-weight:850;color:var(--cyan);margin:8px 0}.empty{color:var(--muted);text-align:center;padding:25px}
-.toast{position:fixed;right:20px;bottom:20px;background:#222b45;border:1px solid #4d5b85;border-radius:12px;padding:12px 16px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:.25s;pointer-events:none}.toast.show{opacity:1;transform:translateY(0)}
-@media(max-width:950px){.app{grid-template-columns:75px 1fr}.sidebar{padding:22px 10px}.brand{padding:0 10px 30px}.brand span:last-child,.nav-label,.nav button .nav-text,.side-bottom{display:none}.nav button{justify-content:center;padding:13px}.stats{grid-template-columns:repeat(2,1fr)}.content-grid{grid-template-columns:1fr}}
-@media(max-width:600px){.app{display:block}.sidebar{height:auto;position:sticky;z-index:5;top:0;border-right:0;border-bottom:1px solid var(--line);padding:10px 12px}.brand{display:none}.nav{display:flex;justify-content:space-between}.nav button{padding:9px 11px}.nav button .nav-text{display:none}.nav-label{display:none}main{padding:22px 14px}.topbar{align-items:flex-start}.top-actions .pill{display:none}.stats{gap:9px}.card{padding:15px}.stat-value{font-size:25px}.week{grid-template-columns:1fr 1fr}.day:last-child{display:none}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UniStream — Stay in your flow ✨</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          animation: {
+            'blob': 'blob 18s infinite alternate',
+            'blob-delayed': 'blob 22s infinite alternate-reverse',
+            'fade-in': 'fadeIn 0.25s ease-out forwards',
+          },
+          keyframes: {
+            blob: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(40px, -50px) scale(1.12)' },
+              '66%': { transform: 'translate(-30px, 30px) scale(0.92)' },
+              '100%': { transform: 'translate(15px, -15px) scale(1.05)' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(6px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .bg-grid-pattern {
+      background-size: 36px 36px;
+      background-image: 
+        linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+    }
+    .dark .bg-grid-pattern {
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.3);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(148, 163, 184, 0.5);
+    }
+  </style>
 </head>
-<body>
-<div class="app">
-<aside class="sidebar">
-  <div class="brand"><div class="logo">U</div><span>UniStream</span></div>
-  <div class="nav-label">WORKSPACE</div>
-  <nav class="nav">
-    <button class="active" data-page="dashboard"><span class="ico">▦</span><span class="nav-text">Overview</span></button>
-    <button data-page="assignments"><span class="ico">☑</span><span class="nav-text">Assignments</span></button>
-    <button data-page="timetable"><span class="ico">▤</span><span class="nav-text">Timetable</span></button>
-    <button data-page="grades"><span class="ico">◈</span><span class="nav-text">Grades & GPA</span></button>
-    <button data-page="notes"><span class="ico">✎</span><span class="nav-text">Quick Notes</span></button>
-  </nav>
-  <div class="side-bottom"><strong>Stay in your flow ✨</strong><small>Your semester, organised in one place.</small></div>
-</aside>
-<main>
-  <header class="topbar">
-    <div><div class="eyebrow" id="dateLabel">YOUR STUDENT WORKSPACE</div><h1 id="pageTitle">Good afternoon, Alvin 👋</h1><p class="sub" id="pageSub">Here's what's happening with your semester today.</p></div>
-    <div class="top-actions"><button class="pill" id="themeBtn">☼ <span id="themeText">Dark mode</span></button><div class="avatar">AG</div></div>
-  </header>
+<body class="font-sans antialiased bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen overflow-x-hidden transition-colors duration-300 selection:bg-indigo-500 selection:text-white">
 
-  <section class="page active" id="dashboard">
-    <div class="grid stats">
-      <div class="card"><div class="stat-top"><span>Active assignments</span><span class="stat-icon">☑</span></div><div class="stat-value" id="activeCount">4</div><div class="trend">↗ Keep your momentum</div></div>
-      <div class="card"><div class="stat-top"><span>Completed</span><span class="stat-icon">✓</span></div><div class="stat-value" id="doneCount">8</div><div class="trend">↗ You're making progress</div></div>
-      <div class="card"><div class="stat-top"><span>Average grade</span><span class="stat-icon">◈</span></div><div class="stat-value" id="avgGrade">78%</div><div class="trend">↗ Solid semester performance</div></div>
-      <div class="card"><div class="stat-top"><span>Study streak</span><span class="stat-icon">⚡</span></div><div class="stat-value">6 days</div><div class="trend">↗ One day at a time</div></div>
-    </div>
-    <div class="grid content-grid">
-      <div class="grid">
-        <div class="card"><div class="card-head"><h2>Study activity</h2><span class="muted" style="font-size:12px">Hours per day · This week</span></div>
-          <div class="chart">
-            <div class="bar-wrap"><div class="bar" style="height:45%"></div><span class="bar-label">Mon</span></div><div class="bar-wrap"><div class="bar" style="height:70%"></div><span class="bar-label">Tue</span></div><div class="bar-wrap"><div class="bar" style="height:55%"></div><span class="bar-label">Wed</span></div><div class="bar-wrap"><div class="bar" style="height:88%"></div><span class="bar-label">Thu</span></div><div class="bar-wrap"><div class="bar" style="height:62%"></div><span class="bar-label">Fri</span></div><div class="bar-wrap"><div class="bar" style="height:35%"></div><span class="bar-label">Sat</span></div><div class="bar-wrap"><div class="bar" style="height:18%"></div><span class="bar-label">Sun</span></div>
+  <!-- Layered Ambient Background -->
+  <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+    <div class="absolute inset-0 bg-grid-pattern"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/60 to-slate-100/90 dark:via-slate-950/60 dark:to-slate-950/95"></div>
+    <div class="absolute -top-32 -left-24 w-96 h-96 bg-indigo-500/20 dark:bg-indigo-600/20 rounded-full blur-3xl animate-blob"></div>
+    <div class="absolute top-1/3 -right-24 w-[28rem] h-[28rem] bg-cyan-400/20 dark:bg-cyan-500/15 rounded-full blur-3xl animate-blob-delayed"></div>
+    <div class="absolute -bottom-32 left-1/3 w-[26rem] h-[26rem] bg-violet-500/20 dark:bg-violet-600/15 rounded-full blur-3xl animate-blob"></div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- ==================== AUTHENTICATION SCREEN ==================== -->
+  <div id="auth-screen" class="min-h-screen flex items-center justify-center p-4 sm:p-6">
+    <div class="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 rounded-3xl overflow-hidden border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/75 backdrop-blur-2xl shadow-2xl">
+      
+      <!-- Left Brand Showcase -->
+      <div class="lg:col-span-5 p-8 sm:p-10 bg-gradient-to-br from-indigo-600 via-indigo-700 to-violet-800 text-white flex flex-col justify-between relative overflow-hidden">
+        <div class="absolute -right-16 -bottom-16 w-64 h-64 bg-white/10 rounded-full blur-2xl"></div>
+        <div class="absolute top-10 right-10 w-24 h-24 bg-cyan-400/20 rounded-full blur-xl"></div>
+        
+        <div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-lg">
+                <i data-lucide="waves" class="w-6 h-6 text-cyan-300"></i>
+              </div>
+              <span class="text-2xl font-bold tracking-tight">UniStream</span>
+            </div>
+            <button type="button" onclick="toggleTheme()" class="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 transition" title="Toggle Theme">
+              <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+              <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+            </button>
+          </div>
+
+          <div class="mt-10">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-white/15 text-cyan-200 border border-white/15 mb-4">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Student Workspace v2.0
+            </span>
+            <h1 class="text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight">
+              Stay in your flow ✨
+            </h1>
+            <p class="mt-3 text-indigo-100/90 text-sm sm:text-base leading-relaxed">
+              Your semester, organised in one place. Manage units, track assignments, structure your timetable, and monitor live weighted grades effortlessly.
+            </p>
           </div>
         </div>
-        <div class="card"><div class="card-head"><h2>Upcoming assignments</h2><button class="link-btn" data-goto="assignments">View all →</button></div><div class="task-list" id="dashTasks"></div></div>
+
+        <div class="mt-10 space-y-3.5 text-sm text-indigo-100">
+          <div class="flex items-center gap-3">
+            <div class="w-7 h-7 rounded-lg bg-white/15 flex items-center justify-center shrink-0">
+              <i data-lucide="book-open" class="w-4 h-4 text-cyan-300"></i>
+            </div>
+            <span>Unified Unit & Course Management</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-7 h-7 rounded-lg bg-white/15 flex items-center justify-center shrink-0">
+              <i data-lucide="calculator" class="w-4 h-4 text-cyan-300"></i>
+            </div>
+            <span>Real-time Weighted Grade & GPA Tracker</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-7 h-7 rounded-lg bg-white/15 flex items-center justify-center shrink-0">
+              <i data-lucide="cloud-check" class="w-4 h-4 text-cyan-300"></i>
+            </div>
+            <span>Local Auto-Save + Instant Guest Demo</span>
+          </div>
+        </div>
       </div>
-      <div class="grid">
-        <div class="card"><div class="card-head"><h2>Course progress</h2><span class="muted" style="font-size:11px">Semester 1</span></div><div class="progress-list">
-          <div class="progress-row"><span>Data Structures & Algorithms</span><b>82%</b><div class="track"><div class="fill" style="width:82%"></div></div></div>
-          <div class="progress-row"><span>Introduction to Programming</span><b>74%</b><div class="track"><div class="fill" style="width:74%"></div></div></div>
-          <div class="progress-row"><span>Entrepreneurship</span><b>91%</b><div class="track"><div class="fill" style="width:91%"></div></div></div>
-          <div class="progress-row"><span>Database Systems</span><b>68%</b><div class="track"><div class="fill" style="width:68%"></div></div></div>
-        </div></div>
-        <div class="card"><div class="card-head"><h2>Focus tip</h2><span>💡</span></div><p class="muted" style="font-size:13px;margin:0">Break big assignments into small tasks. A focused 25-minute session is a great place to start.</p></div>
+
+      <!-- Right Login / Register Form -->
+      <div class="lg:col-span-7 p-8 sm:p-10 flex flex-col justify-center">
+        <div class="max-w-md w-full mx-auto">
+          <div class="flex p-1 rounded-2xl bg-slate-100 dark:bg-slate-800/80 mb-6">
+            <button type="button" id="tab-login" onclick="switchAuthTab('login')" class="flex-1 py-2.5 text-sm font-semibold rounded-xl bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-sm transition">
+              Sign In
+            </button>
+            <button type="button" id="tab-register" onclick="switchAuthTab('register')" class="flex-1 py-2.5 text-sm font-semibold rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
+              Create Account
+            </button>
+          </div>
+
+          <h2 id="auth-heading" class="text-2xl font-bold tracking-tight">Welcome back</h2>
+          <p id="auth-subheading" class="text-sm text-slate-500 dark:text-slate-400 mt-1 mb-6">
+            Sign in to access your saved units, timetable, and semester progress.
+          </p>
+
+          <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-4">
+            <div id="register-name-field" class="hidden">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">Full Name</label>
+              <div class="relative">
+                <i data-lucide="user" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                <input type="text" id="auth-name" placeholder="e.g. Alex Kamau" class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">University / Personal Email</label>
+              <div class="relative">
+                <i data-lucide="mail" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                <input type="email" id="auth-email" required placeholder="student@university.edu" class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">Password</label>
+              <div class="relative">
+                <i data-lucide="lock" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                <input type="password" id="auth-password" required minlength="6" placeholder="••••••••" class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition" />
+              </div>
+            </div>
+
+            <div id="auth-error" class="hidden p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs font-medium"></div>
+
+            <button type="submit" id="auth-submit-btn" class="w-full py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-[0.99] text-white font-semibold text-sm shadow-lg shadow-indigo-600/25 transition flex items-center justify-center gap-2">
+              <span>Sign In to UniStream</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </form>
+
+          <div class="relative my-6">
+            <div class="absolute inset-0 flex items-center">
+              <div class="w-full border-t border-slate-200 dark:border-slate-800"></div>
+            </div>
+            <div class="relative flex justify-center text-xs uppercase">
+              <span class="px-3 bg-white dark:bg-slate-900 text-slate-400 font-medium">Or continue instantly</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button type="button" onclick="handleGoogleLogin()" class="py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 text-sm font-medium flex items-center justify-center gap-2 transition">
+              <svg class="w-4 h-4" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z"/><path fill="#34A853" d="M12 24c3.3 0 6.08-1.09 8.1-2.96l-3.88-3.05c-1.1.74-2.51 1.18-4.22 1.18-3.25 0-6-2.19-6.98-5.14H1.01v3.14C3.05 21.2 7.24 24 12 24Z"/><path fill="#FBBC05" d="M5.02 14.03c-.25-.74-.39-1.54-.39-2.36 0-.82.14-1.62.39-2.36V6.17H1.01C.37 7.45 0 8.88 0 10.39s.37 2.94 1.01 4.22l4.01-3.14Z"/><path fill="#EA4335" d="M12 4.75c1.79 0 3.41.62 4.68 1.82l3.51-3.51C18.07 1.19 15.3 0 12 0 7.24 0 3.05 2.8 1.01 6.83l4.01 3.14c.98-2.95 3.73-5.22 6.98-5.22Z"/></svg>
+              <span>Google</span>
+            </button>
+            <button type="button" onclick="enterGuestMode()" class="py-2.5 px-4 rounded-xl border border-indigo-500/30 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 text-sm font-semibold flex items-center justify-center gap-2 transition">
+              <i data-lucide="sparkles" class="w-4 h-4"></i>
+              <span>Guest / Demo Mode</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section class="page" id="assignments">
-    <div class="card">
-      <div class="card-head"><h2>Assignment tracker</h2><span class="muted" id="taskSummary">Your semester at a glance</span></div>
-      <form id="taskForm" class="form-row" style="margin-bottom:18px"><input class="field" id="taskName" placeholder="Assignment title" required><input class="field" id="taskCourse" placeholder="Course name" required><input class="field" id="taskDue" type="date" required><select class="field" id="taskPriority"><option>Medium</option><option>High</option><option>Low</option></select><button class="primary">+ Add task</button></form>
-      <div class="task-list" id="allTasks"></div>
+  <!-- ==================== MAIN WORKSPACE APP ==================== -->
+  <div id="app-shell" class="hidden min-h-screen flex flex-col lg:flex-row">
+    
+    <!-- Mobile Sidebar Backdrop -->
+    <div id="sidebar-backdrop" onclick="toggleMobileSidebar()" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-30 hidden lg:hidden"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="fixed lg:sticky top-0 left-0 z-40 h-screen w-72 shrink-0 -translate-x-full lg:translate-x-0 transition-transform duration-300 border-r border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl flex flex-col justify-between p-5">
+      <div>
+        <div class="flex items-center justify-between px-2 mb-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 flex items-center justify-center text-white shadow-lg shadow-indigo-600/25">
+              <i data-lucide="waves" class="w-5 h-5 text-cyan-200"></i>
+            </div>
+            <div>
+              <h1 class="font-bold text-lg tracking-tight leading-none">UniStream</h1>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Stay in your flow ✨</p>
+            </div>
+          </div>
+          <button type="button" onclick="toggleMobileSidebar()" class="lg:hidden p-2 rounded-xl text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <button type="button" onclick="openUnitModal()" class="w-full mb-6 py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-md shadow-indigo-600/20 flex items-center justify-center gap-2 transition">
+          <i data-lucide="plus-circle" class="w-4 h-4"></i>
+          <span>Add Semester Unit</span>
+        </button>
+
+        <nav class="space-y-1.5" id="sidebar-nav">
+          <button type="button" onclick="navigateTo('dashboard')" data-nav="dashboard" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition">
+            <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+            <span>Overview Dashboard</span>
+          </button>
+          <button type="button" onclick="navigateTo('units')" data-nav="units" class="nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition">
+            <span class="flex items-center gap-3">
+              <i data-lucide="book-open" class="w-4 h-4"></i>
+              <span>My Units</span>
+            </span>
+            <span id="nav-unit-count" class="px-2 py-0.5 text-xs rounded-full bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 font-semibold">0</span>
+          </button>
+          <button type="button" onclick="navigateTo('assignments')" data-nav="assignments" class="nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition">
+            <span class="flex items-center gap-3">
+              <i data-lucide="check-square" class="w-4 h-4"></i>
+              <span>Assignments</span>
+            </span>
+            <span id="nav-pending-count" class="px-2 py-0.5 text-xs rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-300 font-semibold">0</span>
+          </button>
+          <button type="button" onclick="navigateTo('timetable')" data-nav="timetable" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition">
+            <i data-lucide="calendar-days" class="w-4 h-4"></i>
+            <span>Weekly Timetable</span>
+          </button>
+          <button type="button" onclick="navigateTo('grades')" data-nav="grades" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition">
+            <i data-lucide="calculator" class="w-4 h-4"></i>
+            <span>Grade Calculator</span>
+          </button>
+          <button type="button" onclick="navigateTo('notes')" data-nav="notes" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition">
+            <i data-lucide="sticky-note" class="w-4 h-4"></i>
+            <span>Quick Notes</span>
+          </button>
+          <button type="button" onclick="navigateTo('settings')" data-nav="settings" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition">
+            <i data-lucide="settings" class="w-4 h-4"></i>
+            <span>Profile & Settings</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200/70 dark:from-slate-800/80 dark:to-slate-800/40 border border-slate-200/80 dark:border-slate-700/60">
+        <div class="flex items-center justify-between mb-1.5">
+          <span class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 flex items-center gap-1.5">
+            <i data-lucide="flame" class="w-3.5 h-3.5"></i> Study Streak
+          </span>
+          <span id="sidebar-streak-badge" class="text-xs font-bold">0 days</span>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+          Your semester, organised in one place. Check in daily to keep your momentum alive.
+        </p>
+      </div>
+    </aside>
+
+    <!-- Main Content Column -->
+    <div class="flex-1 flex flex-col min-w-0">
+      
+      <!-- Top Header Bar -->
+      <header class="sticky top-0 z-20 border-b border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl px-4 sm:px-8 py-3.5">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <button type="button" onclick="toggleMobileSidebar()" class="lg:hidden p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200">
+              <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+            <div>
+              <div class="flex items-center gap-2">
+                <h2 id="page-title" class="text-lg sm:text-xl font-bold tracking-tight">Overview Dashboard</h2>
+                <span id="sync-status-pill" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span id="sync-status-text">Saved locally</span>
+                </span>
+              </div>
+              <p id="page-subtitle" class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">Stay in your flow ✨ — Your semester, organised in one place.</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2.5 sm:gap-3">
+            <button type="button" onclick="toggleTheme()" class="p-2.5 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-800/70 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition" title="Toggle Dark/Light Theme">
+              <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+              <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+            </button>
+
+            <div class="flex items-center gap-2.5 pl-2 pr-3 py-1.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-800/70">
+              <div id="user-avatar" class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-500 text-white font-bold text-xs flex items-center justify-center shadow-sm">
+                ST
+              </div>
+              <div class="hidden md:block text-left">
+                <p id="user-display-name" class="text-xs font-semibold leading-tight">Student</p>
+                <p id="user-account-type" class="text-[10px] text-slate-500 dark:text-slate-400 leading-tight">Demo Workspace</p>
+              </div>
+              <button type="button" onclick="handleLogout()" class="ml-1 p-1.5 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-500/10 transition" title="Log Out">
+                <i data-lucide="log-out" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Workspace Views Container -->
+      <main class="flex-1 p-4 sm:p-8 max-w-7xl w-full mx-auto">
+
+        <!-- ==================== VIEW 1: OVERVIEW DASHBOARD ==================== -->
+        <section id="view-dashboard" class="space-y-6 animate-fade-in">
+          <div class="rounded-3xl p-6 sm:p-8 bg-gradient-to-r from-indigo-600/95 via-indigo-700/95 to-violet-700/95 text-white shadow-xl shadow-indigo-950/15 border border-white/15 flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+            <div class="absolute right-0 top-0 w-72 h-72 bg-cyan-400/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="relative z-10">
+              <p class="text-indigo-200 text-xs sm:text-sm font-medium mb-1" id="current-date-label">Thursday, November 12</p>
+              <h1 id="greeting-heading" class="text-2xl sm:text-3xl font-extrabold tracking-tight">Good afternoon, Student 👋</h1>
+              <p class="text-indigo-100/90 text-sm mt-1.5 max-w-xl">
+                Stay in your flow ✨ — You have <span id="hero-pending-tasks" class="font-bold underline decoration-cyan-300">0 pending tasks</span> across <span id="hero-unit-count" class="font-bold">0 active units</span> this semester.
+              </p>
+            </div>
+            <div class="relative z-10 flex flex-wrap items-center gap-3">
+              <button type="button" id="streak-checkin-btn" onclick="checkInStreak()" class="px-4 py-2.5 rounded-xl bg-white text-indigo-700 hover:bg-indigo-50 font-semibold text-sm shadow-lg flex items-center gap-2 transition">
+                <i data-lucide="flame" class="w-4 h-4 text-orange-500"></i>
+                <span id="streak-btn-label">Daily Flow Check-in</span>
+              </button>
+              <button type="button" onclick="navigateTo('assignments')" class="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white border border-white/20 font-medium text-sm transition">
+                View Tasks
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5">
+            <div class="p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm hover:border-indigo-500/40 transition">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Active Assignments</span>
+                <div class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-500 flex items-center justify-center">
+                  <i data-lucide="clock" class="w-4 h-4"></i>
+                </div>
+              </div>
+              <div class="flex items-baseline gap-2">
+                <span id="kpi-active-assignments" class="text-3xl font-extrabold">0</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400">due soon</span>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm hover:border-emerald-500/40 transition">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Completed Tasks</span>
+                <div class="w-9 h-9 rounded-xl bg-emerald-500/15 text-emerald-500 flex items-center justify-center">
+                  <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+                </div>
+              </div>
+              <div class="flex items-baseline gap-2">
+                <span id="kpi-completed-assignments" class="text-3xl font-extrabold">0</span>
+                <span id="kpi-completion-rate" class="text-xs font-medium text-emerald-500">0% done</span>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm hover:border-indigo-500/40 transition">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Weighted Average</span>
+                <div class="w-9 h-9 rounded-xl bg-indigo-500/15 text-indigo-500 flex items-center justify-center">
+                  <i data-lucide="award" class="w-4 h-4"></i>
+                </div>
+              </div>
+              <div class="flex items-baseline gap-2">
+                <span id="kpi-weighted-avg" class="text-3xl font-extrabold">--%</span>
+                <span id="kpi-letter-grade" class="text-xs font-semibold px-2 py-0.5 rounded-md bg-indigo-500/15 text-indigo-500">N/A</span>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm hover:border-orange-500/40 transition">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Study Streak</span>
+                <div class="w-9 h-9 rounded-xl bg-orange-500/15 text-orange-500 flex items-center justify-center">
+                  <i data-lucide="flame" class="w-4 h-4"></i>
+                </div>
+              </div>
+              <div class="flex items-baseline gap-2">
+                <span id="kpi-streak" class="text-3xl font-extrabold">0</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400">consecutive days</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-7 p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm flex flex-col justify-between">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-6">
+                <div>
+                  <h3 class="font-bold text-base">Weekly Study Focus</h3>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">Click any day bar to log +0.5h of deep focus</p>
+                </div>
+                <span id="weekly-hours-total" class="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/15 text-indigo-600 dark:text-indigo-300">
+                  0.0 hrs this week
+                </span>
+              </div>
+              <div id="study-chart-container" class="grid grid-cols-7 gap-2 sm:gap-4 items-end h-48 pt-4">
+              </div>
+            </div>
+
+            <div class="lg:col-span-5 p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 class="font-bold text-base">Unit Performance</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Live grade & task progress per unit</p>
+                  </div>
+                  <button type="button" onclick="navigateTo('units')" class="text-xs font-semibold text-indigo-500 hover:underline">Manage Units</button>
+                </div>
+                <div id="dashboard-course-progress" class="space-y-4 max-h-56 overflow-y-auto pr-1">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-8 p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-bold text-base">Upcoming Deadlines</h3>
+                <button type="button" onclick="navigateTo('assignments')" class="text-xs font-semibold text-indigo-500 hover:underline">All Assignments →</button>
+              </div>
+              <div id="dashboard-upcoming-list" class="space-y-2.5">
+              </div>
+            </div>
+
+            <div class="lg:col-span-4 p-6 rounded-3xl border border-indigo-500/25 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-cyan-500/10 backdrop-blur-xl flex flex-col justify-between">
+              <div>
+                <div class="w-10 h-10 rounded-2xl bg-indigo-500/20 text-indigo-500 flex items-center justify-center mb-4">
+                  <i data-lucide="sparkles" class="w-5 h-5"></i>
+                </div>
+                <h3 class="font-bold text-base mb-2">Daily Flow Tip</h3>
+                <p id="daily-focus-tip" class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  "Break large unit projects into 45-minute distraction-free sprints. Complete one small deliverable before checking notifications."
+                </p>
+              </div>
+              <button type="button" onclick="cycleFocusTip()" class="mt-6 w-full py-2.5 px-4 rounded-xl bg-white/80 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-800 text-xs font-semibold border border-slate-200/80 dark:border-slate-700 transition">
+                Next Focus Tip ✨
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== VIEW 2: MY UNITS / COURSES ==================== -->
+        <section id="view-units" class="hidden space-y-6 animate-fade-in">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/70 backdrop-blur-xl">
+            <div>
+              <h2 class="text-xl font-bold">Semester Units & Courses</h2>
+              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+                Add or edit your units here—changes automatically sync across your Timetable, Assignments, and Grade Calculator.
+              </p>
+            </div>
+            <button type="button" onclick="openUnitModal()" class="px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-lg shadow-indigo-600/20 flex items-center justify-center gap-2 shrink-0 transition">
+              <i data-lucide="plus" class="w-4 h-4"></i>
+              <span>New Unit</span>
+            </button>
+          </div>
+
+          <div id="units-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+          </div>
+        </section>
+
+        <!-- ==================== VIEW 3: ASSIGNMENTS TRACKER ==================== -->
+        <section id="view-assignments" class="hidden space-y-6 animate-fade-in">
+          <div class="p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/70 backdrop-blur-xl">
+            <h3 class="font-bold text-base mb-4">Add New Assignment</h3>
+            <form onsubmit="handleAddAssignment(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3">
+              <input type="text" id="assign-title" required placeholder="Assignment title (e.g. Binary Trees Lab)" class="lg:col-span-4 px-4 py-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+              <select id="assign-unit" required class="unit-select-dropdown lg:col-span-3 px-4 py-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              </select>
+              <input type="date" id="assign-due" required class="lg:col-span-2 px-4 py-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+              <select id="assign-priority" class="lg:col-span-1 px-3 py-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <option value="High">High</option>
+                <option value="Medium" selected>Med</option>
+                <option value="Low">Low</option>
+              </select>
+              <button type="submit" class="lg:col-span-2 py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold transition flex items-center justify-center gap-1.5">
+                <i data-lucide="plus" class="w-4 h-4"></i> Add Task
+              </button>
+            </form>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" onclick="setAssignmentFilter('all')" data-afilter="all" class="afilter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-indigo-600 text-white transition">All</button>
+              <button type="button" onclick="setAssignmentFilter('pending')" data-afilter="pending" class="afilter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 transition">Pending</button>
+              <button type="button" onclick="setAssignmentFilter('completed')" data-afilter="completed" class="afilter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 transition">Completed</button>
+            </div>
+            <select id="assign-unit-filter" onchange="renderAssignments()" class="px-3.5 py-2 rounded-xl bg-white/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs font-medium">
+              <option value="all">Filter by Unit: All Units</option>
+            </select>
+          </div>
+
+          <div id="assignments-list" class="space-y-3">
+          </div>
+        </section>
+
+        <!-- ==================== VIEW 4: WEEKLY TIMETABLE ==================== -->
+        <section id="view-timetable" class="hidden space-y-6 animate-fade-in">
+          <div class="p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/70 backdrop-blur-xl">
+            <h3 class="font-bold text-base mb-4">Add Class / Study Session</h3>
+            <form onsubmit="handleAddTimetableSlot(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3">
+              <select id="tt-unit" required class="unit-select-dropdown lg:col-span-3 px-4 py-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              </select>
+              <select id="tt-day" class="lg:col-span-2 px-3 py-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm">
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+              </select>
+              <input type="text" id="tt-time" required placeholder="09:00 - 11:00" class="lg:col-span-2 px-3.5 py-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm" />
+              <select id="tt-type" class="lg:col-span-2 px-3 py-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm">
+                <option value="Lecture">Lecture</option>
+                <option value="Lab">Lab</option>
+                <option value="Tutorial">Tutorial</option>
+                <option value="Study Group">Study Group</option>
+              </select>
+              <input type="text" id="tt-room" required placeholder="Room / Zoom Link" class="lg:col-span-2 px-3.5 py-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm" />
+              <button type="submit" class="lg:col-span-1 py-2.5 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold flex items-center justify-center transition">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+              </button>
+            </form>
+          </div>
+
+          <div id="timetable-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+          </div>
+        </section>
+
+        <!-- ==================== VIEW 5: GRADE CALCULATOR ==================== -->
+        <section id="view-grades" class="hidden space-y-6 animate-fade-in">
+          <div class="p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/70 backdrop-blur-xl">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+              <div>
+                <h3 class="font-bold text-base">Log Assessment / CAT / Exam Score</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Grouped automatically by unit with live weighted averages</p>
+              </div>
+              <div class="px-4 py-2 rounded-2xl bg-indigo-500/15 border border-indigo-500/20 text-right">
+                <span class="text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 block">Overall Semester Avg</span>
+                <span id="grades-overall-banner" class="text-lg font-extrabold text-indigo-600 dark:text-indigo-300">--%</span>
+              </div>
+            </div>
+
+            <form onsubmit="handleAddGradeItem(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3">
+              <select id="grade-unit" required class="unit-select-dropdown lg:col-span-3 px-4 py-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm">
+              </select>
+              <input type="text" id="grade-name" required placeholder="Assessment (e.g. CAT 1, Midterm)" class="lg:col-span-3 px-4 py-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm" />
+              <input type="number" id="grade-score" required min="0" max="100" step="0.1" placeholder="Score (%)" class="lg:col-span-2 px-4 py-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm" />
+              <input type="number" id="grade-weight" required min="1" max="100" step="1" placeholder="Weight (%)" class="lg:col-span-2 px-4 py-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm" />
+              <button type="submit" class="lg:col-span-2 py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold transition">
+                Add Score
+              </button>
+            </form>
+          </div>
+
+          <div id="grades-by-unit-container" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          </div>
+        </section>
+
+        <!-- ==================== VIEW 6: QUICK NOTES ==================== -->
+        <section id="view-notes" class="hidden space-y-6 animate-fade-in">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-5 p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/70 backdrop-blur-xl h-fit">
+              <h3 class="font-bold text-base mb-4">Quick Lecture Note</h3>
+              <form onsubmit="handleAddNote(event)" class="space-y-3.5">
+                <input type="text" id="note-title" required placeholder="Note headline..." class="w-full px-4 py-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                <select id="note-unit" class="unit-select-dropdown w-full px-4 py-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm">
+                </select>
+                <textarea id="note-content" rows="5" required placeholder="Write key takeaways, formulas, or revision reminders..." class="w-full px-4 py-3 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                <button type="submit" class="w-full py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold transition">
+                  Save Note
+                </button>
+              </form>
+            </div>
+
+            <div id="notes-grid" class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 content-start">
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== VIEW 7: SETTINGS & PROFILE ==================== -->
+        <section id="view-settings" class="hidden space-y-6 animate-fade-in max-w-3xl">
+          <div class="p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/70 backdrop-blur-xl space-y-6">
+            <div>
+              <h3 class="text-lg font-bold">Student Profile & Workspace Settings</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Customize your display name, semester target, and data storage preferences.</p>
+            </div>
+
+            <form onsubmit="handleUpdateProfile(event)" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">Display Name</label>
+                  <input type="text" id="settings-name" required class="w-full px-4 py-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">Current Semester / Year</label>
+                  <input type="text" id="settings-semester" placeholder="e.g. Year 3 • Semester 1" class="w-full px-4 py-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm" />
+                </div>
+              </div>
+              <button type="submit" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold transition">
+                Save Profile Changes
+              </button>
+            </form>
+
+            <div class="pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <h4 class="font-semibold text-sm">Reset Demo Data</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Restore sample units, assignments, and timetable slots.</p>
+              </div>
+              <button type="button" onclick="resetToSampleData()" class="px-4 py-2 rounded-xl border border-amber-500/40 text-amber-600 dark:text-amber-400 hover:bg-amber-500/10 text-xs font-semibold transition">
+                Load Sample Semester
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </main>
     </div>
-  </section>
+  </div>
 
-  <section class="page" id="timetable">
-    <div class="card"><div class="card-head"><h2>Weekly timetable</h2><span class="muted">Sample schedule — edit to suit your classes</span></div>
-      <div class="week">
-        <div class="day"><strong>MONDAY</strong><div class="class">08:00 · Data Structures</div><div class="class">11:00 · Programming</div></div>
-        <div class="day"><strong>TUESDAY</strong><div class="class">09:00 · Database Systems</div><div class="class">14:00 · Tutorial</div></div>
-        <div class="day"><strong>WEDNESDAY</strong><div class="class">08:00 · Programming</div><div class="class">12:00 · Entrepreneurship</div></div>
-        <div class="day"><strong>THURSDAY</strong><div class="class">10:00 · Data Structures</div><div class="class">13:00 · Lab Session</div></div>
-        <div class="day"><strong>FRIDAY</strong><div class="class">09:00 · Database Systems</div><div class="class">11:00 · Study Group</div></div>
+  <!-- ==================== MODAL: ADD / EDIT UNIT ==================== -->
+  <div id="unit-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
+    <div class="w-full max-w-lg rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-2xl animate-fade-in">
+      <div class="flex items-center justify-between mb-5">
+        <h3 id="unit-modal-title" class="text-xl font-bold">Add Semester Unit</h3>
+        <button type="button" onclick="closeUnitModal()" class="p-2 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleSaveUnit(event)" class="space-y-4">
+        <input type="hidden" id="unit-edit-id" />
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">Unit Code *</label>
+            <input type="text" id="unit-code" required placeholder="CSC 301" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm uppercase" />
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">Unit Title *</label>
+            <input type="text" id="unit-name" required placeholder="Data Structures & Algorithms" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">Lecturer / Instructor</label>
+            <input type="text" id="unit-lecturer" placeholder="Dr. Sarah Mwangi" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">Credit Hours / Weight</label>
+            <input type="number" id="unit-credits" min="1" max="12" value="3" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">Target Grade (%)</label>
+            <input type="number" id="unit-target" min="40" max="100" value="80" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">Color Tag</label>
+            <select id="unit-color" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm">
+              <option value="indigo">Indigo Blue</option>
+              <option value="cyan">Electric Cyan</option>
+              <option value="emerald">Emerald Green</option>
+              <option value="violet">Royal Violet</option>
+              <option value="amber">Warm Amber</option>
+              <option value="rose">Coral Rose</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-3 pt-4">
+          <button type="button" onclick="closeUnitModal()" class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm font-medium">Cancel</button>
+          <button type="submit" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-lg shadow-indigo-600/20">Save Unit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: CUSTOM CONFIRMATION ==================== -->
+  <div id="confirm-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
+    <div class="w-full max-w-sm rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-2xl animate-fade-in">
+      <div class="w-11 h-11 rounded-2xl bg-rose-500/15 text-rose-500 flex items-center justify-center mb-4">
+        <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+      </div>
+      <h3 id="confirm-modal-title" class="text-lg font-bold mb-1.5">Are you sure?</h3>
+      <p id="confirm-modal-message" class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
+        This action cannot be undone.
+      </p>
+      <div class="flex items-center justify-end gap-2.5">
+        <button type="button" onclick="closeConfirmModal()" class="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          Cancel
+        </button>
+        <button type="button" id="confirm-modal-action-btn" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-semibold shadow-md shadow-rose-600/20 transition">
+          Confirm
+        </button>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section class="page" id="grades">
-    <div class="grid content-grid">
-      <div class="card"><div class="card-head"><h2>Grade calculator</h2><span class="muted">Add your marks</span></div>
-        <form id="gradeForm" class="grid" style="gap:10px"><input class="field" id="gradeCourse" placeholder="Course name" required><div class="form-row"><input class="field" id="gradeScore" type="number" min="0" max="100" placeholder="Score (%)" required><input class="field" id="gradeUnits" type="number" min="1" max="8" value="3" placeholder="Credit units" required></div><button class="primary">Add grade</button></form>
-        <div style="margin-top:24px"><span class="muted">Weighted average</span><div class="grade-result" id="weightedAvg">—</div></div>
-      </div>
-      <div class="card"><div class="card-head"><h2>Grade records</h2></div><div id="gradeRows" class="muted">No grades added yet.</div></div>
-    </div>
-  </section>
+  <script>
+    // -------------------- CUSTOM CONFIRM DIALOG --------------------
+    let pendingConfirmCallback = null;
 
-  <section class="page" id="notes">
-    <div class="card"><div class="card-head"><h2>Quick notes</h2><span class="muted">Saved automatically on this device</span></div><textarea class="field notes" id="notesArea" placeholder="Write down an idea, lecture note or reminder..."></textarea><div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><span class="muted" id="saveStatus" style="font-size:12px">Ready</span><button class="secondary" id="clearNotes">Clear notes</button></div></div>
-  </section>
-</main>
-</div>
-<div class="toast" id="toast"></div>
-<script>
-const $=s=>document.querySelector(s);
-const seed=[
- {id:1,title:"Implement a linked list",course:"Data Structures & Algorithms",due:"2026-11-18",priority:"High",done:false},
- {id:2,title:"Build a simple student portal",course:"Introduction to Programming",due:"2026-11-20",priority:"Medium",done:false},
- {id:3,title:"Entrepreneurial case study",course:"Entrepreneurship",due:"2026-11-22",priority:"Low",done:false},
- {id:4,title:"Design a database schema",course:"Database Systems",due:"2026-11-25",priority:"Medium",done:false},
- {id:5,title:"Submit practical report",course:"Programming",due:"2026-11-10",priority:"High",done:true}
-];
-let tasks=JSON.parse(localStorage.getItem("cf_tasks")||"null")||seed;
-let grades=JSON.parse(localStorage.getItem("cf_grades")||"[]");
-function save(){localStorage.setItem("cf_tasks",JSON.stringify(tasks));localStorage.setItem("cf_grades",JSON.stringify(grades))}
-function toast(msg){let t=$("#toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2100)}
-function prettyDate(d){if(!d)return "No date";return new Date(d+"T00:00:00").toLocaleDateString(undefined,{day:"numeric",month:"short"})}
-function renderTasks(){
- const open=tasks.filter(t=>!t.done),done=tasks.filter(t=>t.done);
- $("#activeCount").textContent=open.length;$("#doneCount").textContent=done.length;
- $("#taskSummary").textContent=`${open.length} active · ${done.length} completed`;
- const taskHTML=(list)=>list.length?list.map(t=>`<div class="task ${t.done?"done":""}"><input type="checkbox" data-check="${t.id}" ${t.done?"checked":""}><div class="task-info"><div class="task-title">${escapeHTML(t.title)}</div><div class="task-meta">${escapeHTML(t.course)} · Due ${prettyDate(t.due)}</div></div><span class="tag ${t.priority.toLowerCase()}">${t.priority}</span><button class="link-btn" data-delete="${t.id}" aria-label="Delete task">✕</button></div>`).join(""):'<div class="empty">Nothing here yet. Add your first assignment above.</div>';
- $("#allTasks").innerHTML=taskHTML(tasks);$("#dashTasks").innerHTML=taskHTML(open.slice(0,4));
-}
-function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-document.addEventListener("click",e=>{
- const nav=e.target.closest("[data-page]");if(nav){showPage(nav.dataset.page);return}
- const go=e.target.closest("[data-goto]");if(go){showPage(go.dataset.goto);return}
- const del=e.target.closest("[data-delete]");if(del){tasks=tasks.filter(t=>t.id!==+del.dataset.delete);save();renderTasks();toast("Assignment deleted");return}
-});
-document.addEventListener("change",e=>{if(e.target.matches("[data-check]")){let t=tasks.find(x=>x.id===+e.target.dataset.check);if(t)t.done=e.target.checked;save();renderTasks();toast(t.done?"Marked complete ✓":"Moved back to active")}})
-function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));const titles={dashboard:["Good afternoon, Alvin 👋","Here's what's happening with your semester today."],assignments:["Assignments","Keep every deadline under control."],timetable:["Your timetable","A clear view of your teaching week."],grades:["Grades & GPA","Track your performance as you go."],notes:["Quick Notes","Capture ideas before they disappear."]};$("#pageTitle").textContent=titles[id][0];$("#pageSub").textContent=titles[id][1]}
-$("#taskForm").addEventListener("submit",e=>{e.preventDefault();tasks.unshift({id:Date.now(),title:$("#taskName").value.trim(),course:$("#taskCourse").value.trim(),due:$("#taskDue").value,priority:$("#taskPriority").value,done:false});save();renderTasks();e.target.reset();toast("Assignment added successfully")});
-function renderGrades(){let total=grades.reduce((a,g)=>a+g.score*g.units,0),units=grades.reduce((a,g)=>a+g.units,0);let avg=units?total/units:null;$("#weightedAvg").textContent=avg===null?"—":avg.toFixed(1)+"%";$("#avgGrade").textContent=avg===null?"78%":Math.round(avg)+"%";$("#gradeRows").innerHTML=grades.length?`<table class="table"><thead><tr><th>Course</th><th>Score</th><th>Units</th></tr></thead><tbody>${grades.map(g=>`<tr><td>${escapeHTML(g.course)}</td><td>${g.score}%</td><td>${g.units}</td></tr>`).join("")}</tbody></table>`:"No grades added yet."}
-$("#gradeForm").addEventListener("submit",e=>{e.preventDefault();grades.push({course:$("#gradeCourse").value.trim(),score:+$("#gradeScore").value,units:+$("#gradeUnits").value});save();renderGrades();e.target.reset();$("#gradeUnits").value=3;toast("Grade added")});
-$("#notesArea").value=localStorage.getItem("cf_notes")||"";$("#notesArea").addEventListener("input",()=>{localStorage.setItem("cf_notes",$("#notesArea").value);$("#saveStatus").textContent="Saved just now ✓"});$("#clearNotes").onclick=()=>{if(confirm("Clear all your notes?")){$("#notesArea").value="";localStorage.removeItem("cf_notes");$("#saveStatus").textContent="Notes cleared"}};
-let light=false;$("#themeBtn").onclick=()=>{light=!light;document.body.style.setProperty("--bg",light?"#eef1fb":"#0d1020");document.body.style.setProperty("--panel",light?"#fff":"#151a2d");document.body.style.setProperty("--text",light?"#1a2036":"#eef1ff");document.body.style.setProperty("--muted",light?"#66708e":"#9ba5c3");document.body.style.setProperty("--line",light?"#d9deed":"#2a3150");document.body.style.setProperty("--panel2",light?"#f5f6fc":"#1b2238");$("#themeText").textContent=light?"Light mode":"Dark mode"};
-$("#dateLabel").textContent=new Date().toLocaleDateString(undefined,{weekday:"long",day:"numeric",month:"long",year:"numeric"}).toUpperCase();
-renderTasks();renderGrades();
-</script>
+    function showConfirmModal(title, message, onConfirm, btnLabel = 'Confirm') {
+      document.getElementById('confirm-modal-title').innerText = title;
+      document.getElementById('confirm-modal-message').innerText = message;
+      const actionBtn = document.getElementById('confirm-modal-action-btn');
+      actionBtn.innerText = btnLabel;
+      pendingConfirmCallback = onConfirm;
+
+      const modal = document.getElementById('confirm-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      initIcons();
+    }
+
+    function closeConfirmModal() {
+      const modal = document.getElementById('confirm-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      pendingConfirmCallback = null;
+    }
+
+    document.getElementById('confirm-modal-action-btn').addEventListener('click', function () {
+      if (typeof pendingConfirmCallback === 'function') {
+        pendingConfirmCallback();
+      }
+      closeConfirmModal();
+    });
+
+    // -------------------- DEFAULT SAMPLE STATE --------------------
+    const COLOR_MAP = {
+      indigo: { bg: 'bg-indigo-500/15', text: 'text-indigo-500', border: 'border-indigo-500/30', bar: 'bg-indigo-500' },
+      cyan:   { bg: 'bg-cyan-500/15',   text: 'text-cyan-500',   border: 'border-cyan-500/30',   bar: 'bg-cyan-500' },
+      emerald:{ bg: 'bg-emerald-500/15',text: 'text-emerald-500',border: 'border-emerald-500/30',bar: 'bg-emerald-500' },
+      violet: { bg: 'bg-violet-500/15', text: 'text-violet-500', border: 'border-violet-500/30', bar: 'bg-violet-500' },
+      amber:  { bg: 'bg-amber-500/15',  text: 'text-amber-500',  border: 'border-amber-500/30',  bar: 'bg-amber-500' },
+      rose:   { bg: 'bg-rose-500/15',   text: 'text-rose-500',   border: 'border-rose-500/30',   bar: 'bg-rose-500' }
+    };
+
+    const FOCUS_TIPS = [
+      "Break large unit projects into 45-minute distraction-free sprints. Complete one small deliverable before checking notifications.",
+      "Review your lecture notes within 24 hours of class—it boosts long-term retention by up to 60%.",
+      "Tackle your highest-weight unit assignment first while your morning energy is at its peak.",
+      "Keep all CAT dates and lab deadlines in one place so your brain stays focused on solving problems, not remembering dates."
+    ];
+
+    function getDefaultState(displayName = 'Alex Student') {
+      const today = new Date();
+      const plusDays = function (d) {
+        const dt = new Date(today);
+        dt.setDate(dt.getDate() + d);
+        return dt.toISOString().split('T')[0];
+      };
+      return {
+        profile: {
+          name: displayName,
+          semester: 'Year 3 • Semester 1'
+        },
+        streak: 5,
+        lastCheckIn: null,
+        weeklyHours: [2.5, 4.0, 3.5, 5.0, 4.5, 2.0, 1.5],
+        units: [
+          { id: 'u1', code: 'CSC 301', name: 'Data Structures & Algorithms', lecturer: 'Dr. S. Mwangi', credits: 4, target: 85, color: 'indigo' },
+          { id: 'u2', code: 'CSC 305', name: 'Database Systems', lecturer: 'Prof. D. Ochieng', credits: 3, target: 80, color: 'cyan' },
+          { id: 'u3', code: 'MAT 312', name: 'Probability & Statistics', lecturer: 'Dr. E. Wanjiku', credits: 3, target: 78, color: 'emerald' },
+          { id: 'u4', code: 'SWE 310', name: 'Software Engineering', lecturer: 'Mr. K. Mutua', credits: 4, target: 88, color: 'violet' }
+        ],
+        assignments: [
+          { id: 'a1', unitId: 'u1', title: 'Balanced AVL Tree Implementation', dueDate: plusDays(2), priority: 'High', completed: false },
+          { id: 'a2', unitId: 'u2', title: 'ER Diagram & Normalization Lab', dueDate: plusDays(4), priority: 'Medium', completed: false },
+          { id: 'a3', unitId: 'u4', title: 'SRS Architecture Document', dueDate: plusDays(6), priority: 'High', completed: false },
+          { id: 'a4', unitId: 'u3', title: 'Bayesian Inference Problem Set', dueDate: plusDays(-1), priority: 'Low', completed: true }
+        ],
+        timetable: [
+          { id: 't1', unitId: 'u1', day: 'Monday', time: '08:00 - 10:00', type: 'Lecture', room: 'Hall B2' },
+          { id: 't2', unitId: 'u2', day: 'Monday', time: '11:00 - 13:00', type: 'Lab', room: 'Comp Lab 3' },
+          { id: 't3', unitId: 'u3', day: 'Tuesday', time: '09:00 - 11:00', type: 'Lecture', room: 'Science LT1' },
+          { id: 't4', unitId: 'u4', day: 'Wednesday', time: '14:00 - 16:00', type: 'Tutorial', room: 'Room 104' },
+          { id: 't5', unitId: 'u1', day: 'Thursday', time: '10:00 - 12:00', type: 'Lab', room: 'Comp Lab 1' },
+          { id: 't6', unitId: 'u4', day: 'Friday', time: '09:00 - 11:00', type: 'Lecture', room: 'Main Auditorium' }
+        ],
+        grades: [
+          { id: 'g1', unitId: 'u1', name: 'CAT 1', score: 86, weight: 15 },
+          { id: 'g2', unitId: 'u1', name: 'Lab Assessment 1', score: 92, weight: 15 },
+          { id: 'g3', unitId: 'u2', name: 'SQL Practical CAT', score: 81, weight: 20 },
+          { id: 'g4', unitId: 'u3', name: 'Quiz 1 & 2', score: 76, weight: 15 },
+          { id: 'g5', unitId: 'u4', name: 'Agile Sprint Review', score: 89, weight: 25 }
+        ],
+        notes: [
+          { id: 'n1', unitId: 'u1', title: 'Big-O Cheat Sheet', content: 'Binary Search: O(log n) | Merge Sort: O(n log n) | Hash Table Lookup: O(1) avg.', updatedAt: 'Today, 10:15 AM' },
+          { id: 'n2', unitId: 'u2', title: '3NF Normalization Rule', content: 'Must be in 2NF and have no transitive functional dependencies on non-prime attributes.', updatedAt: 'Yesterday' }
+        ]
+      };
+    }
+
+    // -------------------- APPLICATION STATE --------------------
+    let currentUser = null;
+    let appState = getDefaultState();
+    let currentAuthMode = 'login';
+    let assignmentStatusFilter = 'all';
+    let tipIndex = 0;
+
+    // -------------------- PERSISTENCE ENGINE --------------------
+    function saveWorkspaceState() {
+      if (!currentUser) return;
+      try {
+        localStorage.setItem('unistream_state_' + currentUser.uid, JSON.stringify(appState));
+        updateSyncPill('Saved locally');
+      } catch (e) {
+        console.warn("Storage unavailable", e);
+      }
+    }
+
+    function loadWorkspaceState(userId) {
+      try {
+        const local = localStorage.getItem('unistream_state_' + userId);
+        if (local) {
+          appState = Object.assign({}, getDefaultState(), JSON.parse(local));
+        } else {
+          appState = getDefaultState(currentUser.displayName || 'Student');
+          saveWorkspaceState();
+        }
+      } catch (e) {
+        appState = getDefaultState(currentUser.displayName || 'Student');
+      }
+    }
+
+    function updateSyncPill(statusText) {
+      const textEl = document.getElementById('sync-status-text');
+      if (textEl) textEl.innerText = statusText;
+    }
+
+    // -------------------- AUTHENTICATION FLOW --------------------
+    function switchAuthTab(mode) {
+      currentAuthMode = mode;
+      const loginTab = document.getElementById('tab-login');
+      const registerTab = document.getElementById('tab-register');
+      const heading = document.getElementById('auth-heading');
+      const subheading = document.getElementById('auth-subheading');
+      const nameField = document.getElementById('register-name-field');
+      const submitBtn = document.getElementById('auth-submit-btn');
+
+      if (mode === 'login') {
+        loginTab.className = "flex-1 py-2.5 text-sm font-semibold rounded-xl bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-sm transition";
+        registerTab.className = "flex-1 py-2.5 text-sm font-semibold rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition";
+        heading.innerText = "Welcome back";
+        subheading.innerText = "Sign in to access your saved units, timetable, and semester progress.";
+        nameField.classList.add('hidden');
+        submitBtn.querySelector('span').innerText = "Sign In to UniStream";
+      } else {
+        registerTab.className = "flex-1 py-2.5 text-sm font-semibold rounded-xl bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-sm transition";
+        loginTab.className = "flex-1 py-2.5 text-sm font-semibold rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition";
+        heading.innerText = "Create your workspace";
+        subheading.innerText = "Set up your student profile and start organizing your entire semester in one tab.";
+        nameField.classList.remove('hidden');
+        submitBtn.querySelector('span').innerText = "Create Account & Start";
+      }
+    }
+
+    function handleAuthSubmit(event) {
+      event.preventDefault();
+      const email = document.getElementById('auth-email').value.trim();
+      const errorEl = document.getElementById('auth-error');
+      errorEl.classList.add('hidden');
+
+      const name = currentAuthMode === 'register'
+        ? (document.getElementById('auth-name').value.trim() || 'Student')
+        : email.split('@')[0];
+
+      currentUser = {
+        uid: 'local_' + email.replace(/[^a-zA-Z0-9]/g, '_'),
+        email: email,
+        displayName: name,
+        isGuest: false
+      };
+      postSuccessfulLogin();
+    }
+
+    function handleGoogleLogin() {
+      currentUser = {
+        uid: 'google_demo_user',
+        email: 'student@gmail.com',
+        displayName: 'Google Student',
+        isGuest: false
+      };
+      postSuccessfulLogin();
+    }
+
+    function enterGuestMode() {
+      currentUser = {
+        uid: 'guest_demo_workspace',
+        email: 'guest@unistream.edu',
+        displayName: 'Guest Scholar',
+        isGuest: true
+      };
+      postSuccessfulLogin();
+    }
+
+    function postSuccessfulLogin() {
+      loadWorkspaceState(currentUser.uid);
+      document.getElementById('auth-screen').classList.add('hidden');
+      document.getElementById('app-shell').classList.remove('hidden');
+
+      document.getElementById('user-display-name').innerText = currentUser.displayName;
+      document.getElementById('user-account-type').innerText = currentUser.isGuest ? 'Guest Demo Mode' : currentUser.email;
+      const initials = currentUser.displayName.split(' ').map(function (n) { return n[0]; }).join('').substring(0, 2).toUpperCase();
+      document.getElementById('user-avatar').innerText = initials || 'ST';
+
+      document.getElementById('settings-name').value = appState.profile.name;
+      document.getElementById('settings-semester').value = appState.profile.semester;
+
+      navigateTo('dashboard');
+      showToast('Welcome back, ' + currentUser.displayName + '! ✨', "indigo");
+    }
+
+    function handleLogout() {
+      currentUser = null;
+      document.getElementById('app-shell').classList.add('hidden');
+      document.getElementById('auth-screen').classList.remove('hidden');
+      showToast("Logged out successfully.", "slate");
+    }
+
+    // -------------------- NAVIGATION & THEME --------------------
+    let currentView = 'dashboard';
+
+    function navigateTo(viewId) {
+      currentView = viewId;
+      document.querySelectorAll('section[id^="view-"]').forEach(function (el) {
+        el.classList.add('hidden');
+      });
+      const target = document.getElementById('view-' + viewId);
+      if (target) target.classList.remove('hidden');
+
+      document.querySelectorAll('.nav-btn').forEach(function (btn) {
+        btn.className = "nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80";
+        if (btn.dataset.nav === viewId) {
+          btn.className = "nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold bg-indigo-600 text-white shadow-md shadow-indigo-600/20";
+        }
+      });
+
+      const titles = {
+        dashboard: { title: "Overview Dashboard", sub: "Stay in your flow ✨ — Your semester, organised in one place." },
+        units: { title: "Semester Units & Courses", sub: "Manage your university courses and credit weight." },
+        assignments: { title: "Assignment Tracker", sub: "Keep track of deadlines, priorities, and deliverables." },
+        timetable: { title: "Weekly Timetable", sub: "Your schedule of lectures, labs, and tutorials." },
+        grades: { title: "Grade Calculator", sub: "Monitor weighted averages and CAT/Exam scores per unit." },
+        notes: { title: "Quick Lecture Notes", sub: "Jot down formulas and revision summaries instantly." },
+        settings: { title: "Profile & Settings", sub: "Configure your student account and workspace preferences." }
+      };
+
+      if (titles[viewId]) {
+        document.getElementById('page-title').innerText = titles[viewId].title;
+        document.getElementById('page-subtitle').innerText = titles[viewId].sub;
+      }
+
+      document.getElementById('sidebar').classList.add('-translate-x-full');
+      document.getElementById('sidebar-backdrop').classList.add('hidden');
+
+      renderAllViews();
+    }
+
+    function toggleMobileSidebar() {
+      const sb = document.getElementById('sidebar');
+      const backdrop = document.getElementById('sidebar-backdrop');
+      sb.classList.toggle('-translate-x-full');
+      backdrop.classList.toggle('hidden');
+    }
+
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+    }
+
+    // -------------------- RENDER ALL VIEWS --------------------
+    function renderAllViews() {
+      populateUnitDropdowns();
+      renderDashboard();
+      renderUnitsView();
+      renderAssignments();
+      renderTimetable();
+      renderGrades();
+      renderNotes();
+
+      const pendingCount = appState.assignments.filter(function (a) { return !a.completed; }).length;
+      document.getElementById('nav-pending-count').innerText = pendingCount;
+      document.getElementById('nav-unit-count').innerText = appState.units.length;
+      document.getElementById('sidebar-streak-badge').innerText = appState.streak + ' days';
+      initIcons();
+    }
+
+    function populateUnitDropdowns() {
+      const dropdowns = document.querySelectorAll('.unit-select-dropdown');
+      const filterDropdown = document.getElementById('assign-unit-filter');
+
+      let optionsHtml = appState.units.map(function (u) {
+        return '<option value="' + u.id + '">' + u.code + ' - ' + u.name + '</option>';
+      }).join('');
+      if (appState.units.length === 0) {
+        optionsHtml = '<option value="">No units added yet</option>';
+      }
+
+      dropdowns.forEach(function (d) {
+        const currentVal = d.value;
+        d.innerHTML = optionsHtml;
+        if (currentVal) d.value = currentVal;
+      });
+
+      if (filterDropdown) {
+        const curFilter = filterDropdown.value;
+        filterDropdown.innerHTML = '<option value="all">Filter by Unit: All Units</option>' +
+          appState.units.map(function (u) {
+            return '<option value="' + u.id + '">' + u.code + ' - ' + u.name + '</option>';
+          }).join('');
+        filterDropdown.value = curFilter || 'all';
+      }
+    }
+
+    // -------------------- DASHBOARD RENDERER --------------------
+    function renderDashboard() {
+      const todayStr = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+      document.getElementById('current-date-label').innerText = todayStr;
+      document.getElementById('greeting-heading').innerText = 'Good day, ' + appState.profile.name.split(' ')[0] + ' 👋';
+
+      const pendingTasks = appState.assignments.filter(function (a) { return !a.completed; });
+      const completedTasks = appState.assignments.filter(function (a) { return a.completed; });
+      const completionRate = appState.assignments.length ? Math.round((completedTasks.length / appState.assignments.length) * 100) : 0;
+
+      document.getElementById('hero-pending-tasks').innerText = pendingTasks.length + ' pending task' + (pendingTasks.length === 1 ? '' : 's');
+      document.getElementById('hero-unit-count').innerText = appState.units.length + ' active unit' + (appState.units.length === 1 ? '' : 's');
+
+      document.getElementById('kpi-active-assignments').innerText = pendingTasks.length;
+      document.getElementById('kpi-completed-assignments').innerText = completedTasks.length;
+      document.getElementById('kpi-completion-rate').innerText = completionRate + '% done';
+      document.getElementById('kpi-streak').innerText = appState.streak;
+
+      let totalWeightedScore = 0;
+      let totalWeights = 0;
+      appState.units.forEach(function (u) {
+        const uGrades = appState.grades.filter(function (g) { return g.unitId === u.id; });
+        const uTotalW = uGrades.reduce(function (sum, g) { return sum + g.weight; }, 0);
+        if (uTotalW > 0) {
+          const uScore = uGrades.reduce(function (sum, g) { return sum + (g.score * (g.weight / uTotalW)); }, 0);
+          totalWeightedScore += uScore * u.credits;
+          totalWeights += u.credits;
+        }
+      });
+      const overallAvg = totalWeights > 0 ? (totalWeightedScore / totalWeights).toFixed(1) : null;
+      document.getElementById('kpi-weighted-avg').innerText = overallAvg ? overallAvg + '%' : '--%';
+      document.getElementById('grades-overall-banner').innerText = overallAvg ? overallAvg + '%' : '--%';
+
+      const letterEl = document.getElementById('kpi-letter-grade');
+      if (overallAvg) {
+        let l = 'A';
+        if (overallAvg < 40) l = 'F';
+        else if (overallAvg < 50) l = 'D';
+        else if (overallAvg < 60) l = 'C';
+        else if (overallAvg < 70) l = 'B';
+        else if (overallAvg < 80) l = 'B+';
+        else if (overallAvg >= 90) l = 'A+';
+        letterEl.innerText = l;
+      } else {
+        letterEl.innerText = 'N/A';
+      }
+
+      const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      const maxHours = Math.max.apply(null, appState.weeklyHours.concat([6]));
+      const totalWeeklyH = appState.weeklyHours.reduce(function (a, b) { return a + b; }, 0).toFixed(1);
+      document.getElementById('weekly-hours-total').innerText = totalWeeklyH + ' hrs this week';
+
+      const chartContainer = document.getElementById('study-chart-container');
+      chartContainer.innerHTML = appState.weeklyHours.map(function (hrs, idx) {
+        const heightPct = Math.round((hrs / maxHours) * 100);
+        const cTheme = hrs >= 4 ? 'bg-indigo-600 dark:bg-indigo-500' : 'bg-indigo-500/40';
+        return '<div class="flex flex-col items-center gap-2 h-full justify-end group cursor-pointer" onclick="logStudyHour(' + idx + ')">' +
+          '<span class="text-[10px] font-semibold text-slate-500 opacity-0 group-hover:opacity-100 transition">' + hrs + 'h</span>' +
+          '<div class="w-full max-w-[32px] ' + cTheme + ' rounded-xl transition-all duration-300 group-hover:bg-indigo-400" style="height: ' + Math.max(heightPct, 12) + '%;"></div>' +
+          '<span class="text-xs font-medium text-slate-500 dark:text-slate-400">' + days[idx] + '</span>' +
+          '</div>';
+      }).join('');
+
+      const courseProgressEl = document.getElementById('dashboard-course-progress');
+      if (appState.units.length === 0) {
+        courseProgressEl.innerHTML = '<p class="text-xs text-slate-400 py-4 text-center">No units added yet.</p>';
+      } else {
+        courseProgressEl.innerHTML = appState.units.map(function (u) {
+          const uAssignments = appState.assignments.filter(function (a) { return a.unitId === u.id; });
+          const uCompleted = uAssignments.filter(function (a) { return a.completed; }).length;
+          const uPct = uAssignments.length ? Math.round((uCompleted / uAssignments.length) * 100) : 0;
+          const col = COLOR_MAP[u.color] || COLOR_MAP.indigo;
+
+          return '<div class="p-3.5 rounded-2xl bg-slate-100/70 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/50">' +
+            '<div class="flex items-center justify-between mb-2">' +
+            '<div class="flex items-center gap-2">' +
+            '<span class="px-2 py-0.5 rounded-md text-xs font-bold ' + col.bg + ' ' + col.text + '">' + u.code + '</span>' +
+            '<span class="text-xs font-semibold truncate max-w-[140px] sm:max-w-[180px]">' + u.name + '</span>' +
+            '</div>' +
+            '<span class="text-xs font-bold text-slate-600 dark:text-slate-300">' + uPct + '% tasks</span>' +
+            '</div>' +
+            '<div class="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">' +
+            '<div class="h-full ' + col.bar + ' rounded-full transition-all duration-500" style="width: ' + uPct + '%"></div>' +
+            '</div>' +
+            '</div>';
+        }).join('');
+      }
+
+      const upcomingEl = document.getElementById('dashboard-upcoming-list');
+      const pendingList = pendingTasks.slice(0, 4);
+      if (pendingList.length === 0) {
+        upcomingEl.innerHTML = '<div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 text-center text-xs text-slate-400">All caught up! No pending assignments. 🎉</div>';
+      } else {
+        upcomingEl.innerHTML = pendingList.map(function (a) {
+          const unit = appState.units.find(function (u) { return u.id === a.unitId; }) || { code: 'GEN', color: 'indigo' };
+          const col = COLOR_MAP[unit.color] || COLOR_MAP.indigo;
+          const pCol = a.priority === 'High' ? 'bg-rose-500/15 text-rose-500' : 'bg-amber-500/15 text-amber-500';
+          return '<div class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-100/70 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/50 hover:border-indigo-500/40 transition">' +
+            '<div class="flex items-center gap-3">' +
+            '<button type="button" onclick="toggleAssignment(\'' + a.id + '\')" class="w-5 h-5 rounded-lg border-2 border-slate-400 hover:border-indigo-500 flex items-center justify-center transition"></button>' +
+            '<div>' +
+            '<h4 class="text-xs font-semibold">' + a.title + '</h4>' +
+            '<div class="flex items-center gap-2 mt-1">' +
+            '<span class="px-2 py-0.5 rounded text-[10px] font-bold ' + col.bg + ' ' + col.text + '">' + unit.code + '</span>' +
+            '<span class="text-[10px] text-slate-400">Due: ' + a.dueDate + '</span>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '<span class="px-2.5 py-1 rounded-full text-[10px] font-semibold ' + pCol + '">' + a.priority + '</span>' +
+            '</div>';
+        }).join('');
+      }
+    }
+
+    function cycleFocusTip() {
+      tipIndex = (tipIndex + 1) % FOCUS_TIPS.length;
+      document.getElementById('daily-focus-tip').innerText = '"' + FOCUS_TIPS[tipIndex] + '"';
+    }
+
+    function logStudyHour(dayIndex) {
+      appState.weeklyHours[dayIndex] = parseFloat((appState.weeklyHours[dayIndex] + 0.5).toFixed(1));
+      saveWorkspaceState();
+      renderDashboard();
+      showToast("Logged +0.5h study focus!", "emerald");
+    }
+
+    function checkInStreak() {
+      const today = new Date().toDateString();
+      if (appState.lastCheckIn === today) {
+        showToast("Already checked in today! Keep up the flow ✨", "indigo");
+        return;
+      }
+      appState.streak += 1;
+      appState.lastCheckIn = today;
+      saveWorkspaceState();
+      renderDashboard();
+      showToast('🔥 Streak increased to ' + appState.streak + ' days!', "emerald");
+    }
+
+    // -------------------- UNIT MANAGEMENT --------------------
+    function renderUnitsView() {
+      const grid = document.getElementById('units-grid');
+      if (appState.units.length === 0) {
+        grid.innerHTML = '<div class="col-span-full p-10 rounded-3xl border border-dashed border-slate-300 dark:border-slate-700 text-center space-y-3">' +
+          '<i data-lucide="book-open" class="w-10 h-10 text-slate-400 mx-auto"></i>' +
+          '<h3 class="font-bold text-base">No Units Added Yet</h3>' +
+          '<p class="text-xs text-slate-500">Add your university courses to sync your semester across all modules.</p>' +
+          '<button type="button" onclick="openUnitModal()" class="px-4 py-2 rounded-xl bg-indigo-600 text-white text-xs font-semibold">Add First Unit</button>' +
+          '</div>';
+        return;
+      }
+
+      grid.innerHTML = appState.units.map(function (u) {
+        const col = COLOR_MAP[u.color] || COLOR_MAP.indigo;
+        const uAssignments = appState.assignments.filter(function (a) { return a.unitId === u.id; });
+        const uCompleted = uAssignments.filter(function (a) { return a.completed; }).length;
+        const uGrades = appState.grades.filter(function (g) { return g.unitId === u.id; });
+        const uTotalW = uGrades.reduce(function (sum, g) { return sum + g.weight; }, 0);
+        const uAvg = uTotalW > 0 ? (uGrades.reduce(function (sum, g) { return sum + (g.score * (g.weight / uTotalW)); }, 0)).toFixed(1) : '--';
+
+        return '<div class="p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm hover:border-indigo-500/40 transition flex flex-col justify-between">' +
+          '<div>' +
+          '<div class="flex items-center justify-between mb-4">' +
+          '<span class="px-3 py-1 rounded-xl text-xs font-extrabold ' + col.bg + ' ' + col.text + ' border ' + col.border + '">' + u.code + '</span>' +
+          '<div class="flex items-center gap-1.5">' +
+          '<button type="button" onclick="editUnit(\'' + u.id + '\')" class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-indigo-500 transition" title="Edit Unit">' +
+          '<i data-lucide="edit-3" class="w-4 h-4"></i>' +
+          '</button>' +
+          '<button type="button" onclick="deleteUnit(\'' + u.id + '\')" class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-rose-500 transition" title="Delete Unit">' +
+          '<i data-lucide="trash-2" class="w-4 h-4"></i>' +
+          '</button>' +
+          '</div>' +
+          '</div>' +
+          '<h3 class="font-bold text-base mb-1">' + u.name + '</h3>' +
+          '<p class="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 mb-4">' +
+          '<i data-lucide="user" class="w-3.5 h-3.5"></i> ' + (u.lecturer || 'Instructor TBD') +
+          '</p>' +
+          '<div class="grid grid-cols-3 gap-2 py-3 border-y border-slate-200/70 dark:border-slate-800 text-center mb-4">' +
+          '<div><span class="text-[10px] uppercase tracking-wider text-slate-400 block">Credits</span><span class="text-sm font-bold">' + u.credits + ' CH</span></div>' +
+          '<div><span class="text-[10px] uppercase tracking-wider text-slate-400 block">Current Avg</span><span class="text-sm font-bold text-indigo-500">' + uAvg + '%</span></div>' +
+          '<div><span class="text-[10px] uppercase tracking-wider text-slate-400 block">Target</span><span class="text-sm font-bold text-emerald-500">' + u.target + '%</span></div>' +
+          '</div>' +
+          '</div>' +
+          '<div class="flex items-center justify-between text-xs text-slate-500">' +
+          '<span>' + uCompleted + '/' + uAssignments.length + ' tasks completed</span>' +
+          '<span class="font-medium">Weight: ' + u.credits + 'x</span>' +
+          '</div>' +
+          '</div>';
+      }).join('');
+    }
+
+    function openUnitModal(unitId = null) {
+      const modal = document.getElementById('unit-modal');
+      const titleEl = document.getElementById('unit-modal-title');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+
+      if (unitId) {
+        titleEl.innerText = "Edit Unit";
+        const unit = appState.units.find(function (u) { return u.id === unitId; });
+        if (unit) {
+          document.getElementById('unit-edit-id').value = unit.id;
+          document.getElementById('unit-code').value = unit.code;
+          document.getElementById('unit-name').value = unit.name;
+          document.getElementById('unit-lecturer').value = unit.lecturer;
+          document.getElementById('unit-credits').value = unit.credits;
+          document.getElementById('unit-target').value = unit.target;
+          document.getElementById('unit-color').value = unit.color;
+        }
+      } else {
+        titleEl.innerText = "Add Semester Unit";
+        document.getElementById('unit-edit-id').value = '';
+        document.getElementById('unit-code').value = '';
+        document.getElementById('unit-name').value = '';
+        document.getElementById('unit-lecturer').value = '';
+        document.getElementById('unit-credits').value = 3;
+        document.getElementById('unit-target').value = 80;
+        document.getElementById('unit-color').value = 'indigo';
+      }
+    }
+
+    function closeUnitModal() {
+      const modal = document.getElementById('unit-modal');
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }
+
+    function handleSaveUnit(event) {
+      event.preventDefault();
+      const editId = document.getElementById('unit-edit-id').value;
+      const code = document.getElementById('unit-code').value.trim().toUpperCase();
+      const name = document.getElementById('unit-name').value.trim();
+      const lecturer = document.getElementById('unit-lecturer').value.trim();
+      const credits = parseInt(document.getElementById('unit-credits').value) || 3;
+      const target = parseInt(document.getElementById('unit-target').value) || 80;
+      const color = document.getElementById('unit-color').value;
+
+      if (editId) {
+        const idx = appState.units.findIndex(function (u) { return u.id === editId; });
+        if (idx !== -1) {
+          appState.units[idx] = Object.assign({}, appState.units[idx], { code: code, name: name, lecturer: lecturer, credits: credits, target: target, color: color });
+        }
+        showToast("Unit updated successfully!", "emerald");
+      } else {
+        appState.units.push({ id: 'u_' + Date.now(), code: code, name: name, lecturer: lecturer, credits: credits, target: target, color: color });
+        showToast("New unit added to semester!", "emerald");
+      }
+
+      closeUnitModal();
+      saveWorkspaceState();
+      renderAllViews();
+    }
+
+    function editUnit(id) {
+      openUnitModal(id);
+    }
+
+    function deleteUnit(id) {
+      showConfirmModal(
+        "Delete Unit?",
+        "This will permanently delete this unit along with its linked assignments, timetable slots, and grades.",
+        function () {
+          appState.units = appState.units.filter(function (u) { return u.id !== id; });
+          appState.assignments = appState.assignments.filter(function (a) { return a.unitId !== id; });
+          appState.timetable = appState.timetable.filter(function (t) { return t.unitId !== id; });
+          appState.grades = appState.grades.filter(function (g) { return g.unitId !== id; });
+          saveWorkspaceState();
+          renderAllViews();
+          showToast("Unit deleted.", "slate");
+        },
+        "Delete Unit"
+      );
+    }
+
+    // -------------------- ASSIGNMENTS TRACKER --------------------
+    function setAssignmentFilter(filter) {
+      assignmentStatusFilter = filter;
+      document.querySelectorAll('.afilter-btn').forEach(function (btn) {
+        btn.className = "afilter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 transition";
+        if (btn.dataset.afilter === filter) {
+          btn.className = "afilter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-indigo-600 text-white transition";
+        }
+      });
+      renderAssignments();
+    }
+
+    function handleAddAssignment(event) {
+      event.preventDefault();
+      const title = document.getElementById('assign-title').value.trim();
+      const unitId = document.getElementById('assign-unit').value;
+      const dueDate = document.getElementById('assign-due').value;
+      const priority = document.getElementById('assign-priority').value;
+
+      if (!unitId) {
+        showToast("Please add at least one unit before creating assignments.", "rose");
+        return;
+      }
+
+      appState.assignments.unshift({ id: 'a_' + Date.now(), unitId: unitId, title: title, dueDate: dueDate, priority: priority, completed: false });
+      document.getElementById('assign-title').value = '';
+      saveWorkspaceState();
+      renderAllViews();
+      showToast("Assignment added!", "emerald");
+    }
+
+    function toggleAssignment(id) {
+      const a = appState.assignments.find(function (x) { return x.id === id; });
+      if (a) {
+        a.completed = !a.completed;
+        saveWorkspaceState();
+        renderAllViews();
+      }
+    }
+
+    function deleteAssignment(id) {
+      appState.assignments = appState.assignments.filter(function (a) { return a.id !== id; });
+      saveWorkspaceState();
+      renderAllViews();
+      showToast("Assignment removed.", "slate");
+    }
+
+    function renderAssignments() {
+      const listEl = document.getElementById('assignments-list');
+      const unitFilter = document.getElementById('assign-unit-filter').value;
+
+      let filtered = appState.assignments;
+      if (assignmentStatusFilter === 'pending') filtered = filtered.filter(function (a) { return !a.completed; });
+      if (assignmentStatusFilter === 'completed') filtered = filtered.filter(function (a) { return a.completed; });
+      if (unitFilter && unitFilter !== 'all') filtered = filtered.filter(function (a) { return a.unitId === unitFilter; });
+
+      if (filtered.length === 0) {
+        listEl.innerHTML = '<div class="p-8 rounded-2xl bg-white/50 dark:bg-slate-900/50 text-center text-xs text-slate-400">No assignments match this filter.</div>';
+        return;
+      }
+
+      listEl.innerHTML = filtered.map(function (a) {
+        const unit = appState.units.find(function (u) { return u.id === a.unitId; }) || { code: 'GEN', color: 'indigo' };
+        const col = COLOR_MAP[unit.color] || COLOR_MAP.indigo;
+        const pCol = a.priority === 'High' ? 'bg-rose-500/15 text-rose-500' : (a.priority === 'Medium' ? 'bg-amber-500/15 text-amber-500' : 'bg-blue-500/15 text-blue-500');
+
+        return '<div class="flex items-center justify-between p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm hover:border-indigo-500/40 transition">' +
+          '<div class="flex items-center gap-3.5">' +
+          '<input type="checkbox" ' + (a.completed ? 'checked' : '') + ' onchange="toggleAssignment(\'' + a.id + '\')" class="w-5 h-5 rounded-lg accent-indigo-600 cursor-pointer" />' +
+          '<div>' +
+          '<h4 class="text-sm font-semibold ' + (a.completed ? 'line-through text-slate-400' : '') + '">' + a.title + '</h4>' +
+          '<div class="flex flex-wrap items-center gap-2 mt-1">' +
+          '<span class="px-2 py-0.5 rounded text-[10px] font-bold ' + col.bg + ' ' + col.text + '">' + unit.code + '</span>' +
+          '<span class="text-xs text-slate-400">Due: ' + a.dueDate + '</span>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '<div class="flex items-center gap-3">' +
+          '<span class="px-2.5 py-1 rounded-full text-[10px] font-semibold ' + pCol + '">' + a.priority + '</span>' +
+          '<button type="button" onclick="deleteAssignment(\'' + a.id + '\')" class="p-2 rounded-xl text-slate-400 hover:text-rose-500 transition">' +
+          '<i data-lucide="trash-2" class="w-4 h-4"></i>' +
+          '</button>' +
+          '</div>' +
+          '</div>';
+      }).join('');
+      initIcons();
+    }
+
+    // -------------------- WEEKLY TIMETABLE --------------------
+    function handleAddTimetableSlot(event) {
+      event.preventDefault();
+      const unitId = document.getElementById('tt-unit').value;
+      const day = document.getElementById('tt-day').value;
+      const time = document.getElementById('tt-time').value.trim();
+      const type = document.getElementById('tt-type').value;
+      const room = document.getElementById('tt-room').value.trim();
+
+      if (!unitId) {
+        showToast("Please add units first.", "rose");
+        return;
+      }
+
+      appState.timetable.push({ id: 't_' + Date.now(), unitId: unitId, day: day, time: time, type: type, room: room });
+      document.getElementById('tt-time').value = '';
+      document.getElementById('tt-room').value = '';
+      saveWorkspaceState();
+      renderAllViews();
+      showToast("Class added to timetable!", "emerald");
+    }
+
+    function deleteTimetableSlot(id) {
+      appState.timetable = appState.timetable.filter(function (t) { return t.id !== id; });
+      saveWorkspaceState();
+      renderAllViews();
+      showToast("Slot removed.", "slate");
+    }
+
+    function renderTimetable() {
+      const grid = document.getElementById('timetable-grid');
+      const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+      grid.innerHTML = days.map(function (day) {
+        const slots = appState.timetable.filter(function (t) { return t.day === day; });
+        return '<div class="p-4 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm flex flex-col">' +
+          '<div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-200/60 dark:border-slate-800">' +
+          '<h4 class="font-bold text-sm">' + day + '</h4>' +
+          '<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-indigo-500/15 text-indigo-500">' + slots.length + ' classes</span>' +
+          '</div>' +
+          '<div class="space-y-2.5 flex-1">' +
+          (slots.length === 0 ? '<p class="text-xs text-slate-400 text-center py-6">No classes</p>' : slots.map(function (s) {
+            const unit = appState.units.find(function (u) { return u.id === s.unitId; }) || { code: 'GEN', color: 'indigo' };
+            const col = COLOR_MAP[unit.color] || COLOR_MAP.indigo;
+            return '<div class="p-3 rounded-2xl bg-slate-100/70 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/50 relative group">' +
+              '<div class="flex items-center justify-between mb-1">' +
+              '<span class="px-2 py-0.5 rounded text-[10px] font-bold ' + col.bg + ' ' + col.text + '">' + unit.code + '</span>' +
+              '<button type="button" onclick="deleteTimetableSlot(\'' + s.id + '\')" class="text-slate-400 hover:text-rose-500 transition opacity-0 group-hover:opacity-100">' +
+              '<i data-lucide="x" class="w-3.5 h-3.5"></i>' +
+              '</button>' +
+              '</div>' +
+              '<p class="text-xs font-semibold">' + s.type + ' • ' + s.time + '</p>' +
+              '<p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 flex items-center gap-1">' +
+              '<i data-lucide="map-pin" class="w-3 h-3"></i> ' + s.room +
+              '</p>' +
+              '</div>';
+          }).join('')) +
+          '</div>' +
+          '</div>';
+      }).join('');
+    }
+
+    // -------------------- GRADE CALCULATOR --------------------
+    function handleAddGradeItem(event) {
+      event.preventDefault();
+      const unitId = document.getElementById('grade-unit').value;
+      const name = document.getElementById('grade-name').value.trim();
+      const score = parseFloat(document.getElementById('grade-score').value);
+      const weight = parseInt(document.getElementById('grade-weight').value);
+
+      if (!unitId) {
+        showToast("Please add units first.", "rose");
+        return;
+      }
+
+      appState.grades.push({ id: 'g_' + Date.now(), unitId: unitId, name: name, score: score, weight: weight });
+      document.getElementById('grade-name').value = '';
+      document.getElementById('grade-score').value = '';
+      document.getElementById('grade-weight').value = '';
+      saveWorkspaceState();
+      renderAllViews();
+      showToast("Score logged successfully!", "emerald");
+    }
+
+    function deleteGradeItem(id) {
+      appState.grades = appState.grades.filter(function (g) { return g.id !== id; });
+      saveWorkspaceState();
+      renderAllViews();
+      showToast("Score removed.", "slate");
+    }
+
+    function renderGrades() {
+      const container = document.getElementById('grades-by-unit-container');
+      if (appState.units.length === 0) {
+        container.innerHTML = '<p class="text-xs text-slate-400 col-span-2 text-center py-8">No units available.</p>';
+        return;
+      }
+
+      container.innerHTML = appState.units.map(function (u) {
+        const uGrades = appState.grades.filter(function (g) { return g.unitId === u.id; });
+        const totalW = uGrades.reduce(function (sum, g) { return sum + g.weight; }, 0);
+        const weightedAvg = totalW > 0 ? (uGrades.reduce(function (sum, g) { return sum + (g.score * (g.weight / totalW)); }, 0)).toFixed(1) : 0;
+        const col = COLOR_MAP[u.color] || COLOR_MAP.indigo;
+
+        return '<div class="p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm flex flex-col justify-between">' +
+          '<div>' +
+          '<div class="flex items-center justify-between mb-4">' +
+          '<div class="flex items-center gap-2">' +
+          '<span class="px-2.5 py-1 rounded-xl text-xs font-bold ' + col.bg + ' ' + col.text + '">' + u.code + '</span>' +
+          '<h4 class="font-bold text-sm">' + u.name + '</h4>' +
+          '</div>' +
+          '<div class="text-right">' +
+          '<span class="text-xs text-slate-400 block">Unit Average</span>' +
+          '<span class="text-lg font-extrabold text-indigo-600 dark:text-indigo-400">' + weightedAvg + '%</span>' +
+          '</div>' +
+          '</div>' +
+          '<div class="space-y-2 mb-4">' +
+          (uGrades.length === 0 ? '<p class="text-xs text-slate-400 text-center py-4">No CATs or exams logged yet.</p>' : uGrades.map(function (g) {
+            return '<div class="flex items-center justify-between p-3 rounded-2xl bg-slate-100/70 dark:bg-slate-800/50 text-xs">' +
+              '<div>' +
+              '<span class="font-semibold">' + g.name + '</span>' +
+              '<span class="text-slate-400 ml-2">Weight: ' + g.weight + '%</span>' +
+              '</div>' +
+              '<div class="flex items-center gap-3">' +
+              '<span class="font-bold">' + g.score + '%</span>' +
+              '<button type="button" onclick="deleteGradeItem(\'' + g.id + '\')" class="text-slate-400 hover:text-rose-500">' +
+              '<i data-lucide="x" class="w-3.5 h-3.5"></i>' +
+              '</button>' +
+              '</div>' +
+              '</div>';
+          }).join('')) +
+          '</div>' +
+          '</div>' +
+          '<div class="pt-3 border-t border-slate-200/60 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500">' +
+          '<span>Total Weight Logged: ' + totalW + '% / 100%</span>' +
+          '<span class="font-medium">Target: ' + u.target + '%</span>' +
+          '</div>' +
+          '</div>';
+      }).join('');
+    }
+
+    // -------------------- QUICK NOTES --------------------
+    function handleAddNote(event) {
+      event.preventDefault();
+      const title = document.getElementById('note-title').value.trim();
+      const unitId = document.getElementById('note-unit').value;
+      const content = document.getElementById('note-content').value.trim();
+
+      appState.notes.unshift({ id: 'n_' + Date.now(), unitId: unitId, title: title, content: content, updatedAt: 'Just now' });
+      document.getElementById('note-title').value = '';
+      document.getElementById('note-content').value = '';
+      saveWorkspaceState();
+      renderAllViews();
+      showToast("Note saved!", "emerald");
+    }
+
+    function deleteNote(id) {
+      appState.notes = appState.notes.filter(function (n) { return n.id !== id; });
+      saveWorkspaceState();
+      renderAllViews();
+      showToast("Note deleted.", "slate");
+    }
+
+    function renderNotes() {
+      const grid = document.getElementById('notes-grid');
+      if (appState.notes.length === 0) {
+        grid.innerHTML = '<p class="text-xs text-slate-400 col-span-2 text-center py-8">No quick notes saved yet.</p>';
+        return;
+      }
+
+      grid.innerHTML = appState.notes.map(function (n) {
+        const unit = appState.units.find(function (u) { return u.id === n.unitId; }) || { code: 'GEN', color: 'indigo' };
+        const col = COLOR_MAP[unit.color] || COLOR_MAP.indigo;
+
+        return '<div class="p-5 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm hover:border-indigo-500/40 transition flex flex-col justify-between">' +
+          '<div>' +
+          '<div class="flex items-center justify-between mb-3">' +
+          '<span class="px-2 py-0.5 rounded text-[10px] font-bold ' + col.bg + ' ' + col.text + '">' + unit.code + '</span>' +
+          '<button type="button" onclick="deleteNote(\'' + n.id + '\')" class="text-slate-400 hover:text-rose-500 transition">' +
+          '<i data-lucide="trash-2" class="w-4 h-4"></i>' +
+          '</button>' +
+          '</div>' +
+          '<h4 class="font-bold text-sm mb-1.5">' + n.title + '</h4>' +
+          '<p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-wrap">' + n.content + '</p>' +
+          '</div>' +
+          '<div class="mt-4 pt-3 border-t border-slate-200/60 dark:border-slate-800 text-[10px] text-slate-400">' +
+          'Updated: ' + n.updatedAt +
+          '</div>' +
+          '</div>';
+      }).join('');
+    }
+
+    // -------------------- SETTINGS & PROFILE --------------------
+    function handleUpdateProfile(event) {
+      event.preventDefault();
+      const name = document.getElementById('settings-name').value.trim();
+      const semester = document.getElementById('settings-semester').value.trim();
+
+      appState.profile.name = name;
+      appState.profile.semester = semester;
+      currentUser.displayName = name;
+
+      document.getElementById('user-display-name').innerText = name;
+      saveWorkspaceState();
+      renderAllViews();
+      showToast("Profile settings updated successfully!", "emerald");
+    }
+
+    function resetToSampleData() {
+      showConfirmModal(
+        "Load Sample Semester?",
+        "This will overwrite your current workspace units, assignments, and grades with the default sample semester.",
+        function () {
+          appState = getDefaultState(currentUser.displayName);
+          saveWorkspaceState();
+          renderAllViews();
+          showToast("Sample semester restored.", "emerald");
+        },
+        "Reset Data"
+      );
+    }
+
+    // -------------------- TOAST NOTIFICATION --------------------
+    function showToast(message, colorKey = 'indigo') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+
+      const colors = {
+        indigo: 'bg-indigo-600 text-white shadow-indigo-600/30',
+        emerald: 'bg-emerald-600 text-white shadow-emerald-600/30',
+        rose: 'bg-rose-600 text-white shadow-rose-600/30',
+        slate: 'bg-slate-800 text-white shadow-slate-900/30'
+      };
+
+      toast.className = 'pointer-events-auto px-4 py-3 rounded-2xl text-xs font-semibold shadow-lg backdrop-blur-md animate-fade-in flex items-center gap-2.5 ' + (colors[colorKey] || colors.indigo);
+      toast.innerHTML = '<i data-lucide="sparkles" class="w-4 h-4"></i><span>' + message + '</span>';
+
+      container.appendChild(toast);
+      initIcons();
+
+      setTimeout(function () {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(function () { toast.remove(); }, 300);
+      }, 3000);
+    }
+
+    function initIcons() {
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', initIcons);
+    initIcons();
+  </script>
 </body>
 </html>
